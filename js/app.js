@@ -4,180 +4,147 @@ function getRandom (maxCust, minCust) {
     return Math.ceil(Math.random() * (maxCust - minCust) + minCust);
 }
 
+let hoursOOp = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
 
-const sea = {
-    location: "Seattle",
-    minCust: 23,
-    maxCust: 65,
-    avgCSales: 6.3,
-    opHrs: ["06:00", "07:00", "08:00", "09:00", "10:00","11:00","12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-    hrlyCust() {
-        //console.log(this.maxCust);
-        //console.log(this.minCust);
+
+function cookieStandLocation(location, min, max, avg, hours) {
+    let stand = {};
+    stand.location = location;
+    stand.minCust = min;
+    stand.maxCust = max;
+    stand.avgCSales = avg;
+    stand.opHrs = hours;
+    stand.hrlyCookies = [];
+
+    stand.hrlyCust = function() {
         return getRandom (this.maxCust, this.minCust);
-    },
-    hrlyCookies: [],
-    getCookies() {
+    }
+
+    stand.getCookies = function getCookies() {
         for (let i = 0; i < this.opHrs.length; i++) {
-            //console.log("seatle avg cookies/sale", this.avgCSales);
-            //console.log("seatle avg customer/hour", this.hrlyCust());
             this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
         }
         return this.hrlyCookies;
     }
 
- 
-}
-
-    let seaDArray = document.getElementById("seaData")
-    for (let i = 0; i < sea.opHrs.length; i++) {
-        let seaVar = document.createElement("li");
-        seaVar.innerHTML = `${sea.opHrs[i]}: ${sea.getCookies()[i]} cookies`;
-        seaDArray.append(seaVar);
-    }
-
-const tok = {
-    location: "Tokyo",
-    minCust: 3,
-    maxCust: 24,
-    avgCSales: 1.2,
-    opHrs: ["06:00", "07:00", "08:00", "09:00", "10:00","11:00","12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-    hrlyCust: function() {
-        //console.log(this.maxCust);
-        //console.log(this.minCust);
-        return getRandom (this.maxCust, this.minCust);
-    },
-    hrlyCookies: [],
-    getCookies() {
-        for (let i = 0; i < this.opHrs.length; i++) {
-           // console.log(`${this.location} avg cookies/sale`, this.avgCSales);
-            //console.log(`${this.location} avg customer/hour`, this.hrlyCust());
-            this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
-        }
-        return this.hrlyCookies;
-    } 
-}
-
-    let tokDArray = document.getElementById("tokData")
-    for (let i = 0; i < tok.opHrs.length; i++) {
-        let tokVar = document.createElement("li");
-        tokVar.innerHTML = `${tok.opHrs[i]}: ${tok.getCookies()[i]} cookies`;
-        tokDArray.append(tokVar);
-    }
-
-
-const dub = {
-    location: "Dubai",
-    minCust: 11,
-    maxCust: 38,
-    avgCSales: 3.7,
-    opHrs: ["06:00", "07:00", "08:00", "09:00", "10:00","11:00","12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-    hrlyCust() {
-        //console.log(this.maxCust);
-        //console.log(this.minCust);
-        return getRandom (this.maxCust, this.minCust);
-    },
-    hrlyCookies: [],
-    getCookies() {
-        for (let i = 0; i < this.opHrs.length; i++) {
-            //console.log(`${this.location} avg cookies/sale`, this.avgCSales);
-            //console.log(`${this.location} avg customer/hour`, this.hrlyCust());
-            this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
-        }
-        return this.hrlyCookies;
-    } 
-}
-
-    let dubDArray = document.getElementById("dubData")
-    for (let i = 0; i < dub.opHrs.length; i++) {
-        let dubVar = document.createElement("li");
-        dubVar.innerHTML = `${dub.opHrs[i]}: ${dub.getCookies()[i]} cookies`;
-        dubDArray.append(dubVar);
-    }
-
-
-
-const par = {
-    location: "Paris",
-    minCust: 20,
-    maxCust: 38,
-    avgCSales: 2.3,    avgCSales: 3.7,
-    opHrs: ["06:00", "07:00", "08:00", "09:00", "10:00","11:00","12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-    hrlyCust() {
-        //console.log(this.maxCust);
-        //console.log(this.minCust);
-        return getRandom (this.maxCust, this.minCust);
-    },
-    hrlyCookies: [],
-    getCookies() {
-        for (let i = 0; i < this.opHrs.length; i++) {
-            //console.log(`${this.location} avg cookies/sale`, this.avgCSales);
-            //console.log(`${this.location} avg customer/hour`, this.hrlyCust());
-            this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
-        }
-        return this.hrlyCookies;
-    },
-    totalCSales() {
+    stand.dailySales = function dailySales() {
         let sum = 0;
-        for (let s = 0; s < this.opHrs.length; s++){
+        for (let s = 0; s < this.opHrs.length; s++) {
         sum += this.getCookies()[s];
         }
-        return sum
+        return sum;
     }
-     
+
+    
+    
+//loop through sales per hour, add them up then render 
+
+    stand.render = function() {
+     let trCookieStands = document.createElement("tr");
+     let localeTD = document.createElement("td");
+     localeTD.innerHTML = this.location;
+     trCookieStands.append(localeTD);
+
+        for (let c = 0; c < this.opHrs.length; c++) {
+            let tdCookies = document.createElement("td");
+            tdCookies.innerHTML = `${this.hrlyCookies[c]} cookies`;
+            trCookieStands.append(tdCookies);
+        }
+
+        /*for (let d = 0; d < this.location. ; d++) {
+        let dailySum = document.createElement("td");
+        dailySum.innerHTML = `${this.dailySum()} cookies`;
+        trCookieStands.append(dailySum);
+        }*/ 
+
+        document.getElementById("salesData").append(trCookieStands); 
+        let dailySum = document.createElement("td");
+        dailySum.innerHTML = `${this.dailySales()} cookies`;
+        trCookieStands.append(dailySum);
+
+        
+    }
+
+    return stand;
+    
+
 }
 
-    let parDArray = document.getElementById("parData")
-    for (let i = 0; i < par.opHrs.length; i++) {
-        let parVar = document.createElement("li");
-        parVar.innerHTML = `${par.opHrs[i]}: ${par.getCookies()[i]} cookies`;
-        parDArray.append(parVar);
+const sea = new cookieStandLocation("Seattle", 23, 65, 6.3, hoursOOp, []);
+sea.hrlyCust();
+sea.getCookies();
+sea.dailySales();
+sea.render();
+
+const tok = cookieStandLocation("Tokyo", 3, 24, 1.2, hoursOOp, []);
+tok.hrlyCust();
+tok.getCookies();
+tok.dailySales();
+tok.render();
+
+const dub = cookieStandLocation("Dubai", 11, 38, 3.7, hoursOOp, []);
+dub.hrlyCust();
+dub.getCookies();
+dub.dailySales();
+dub.render();
+
+const par = cookieStandLocation("Paris", 20, 38, 2.3, hoursOOp, []);
+par.hrlyCust();
+par.getCookies();
+par.dailySales();
+par.render();
+
+const lim = cookieStandLocation("Lima", 2, 16, 4.6, hoursOOp, []);
+lim.hrlyCust();
+lim.getCookies();
+lim.dailySales();
+lim.render();
+
+//iterates over the hrlyCookies arrays of each object and sums the values at each index position
+function getTotalCPH(objArr) {
+    let totalCPH = new Array(objArr[0].opHrs.length).fill(0);
+    for (let l = 0; l < objArr.length; l++) {
+      let cookiesArr = objArr[l].hrlyCookies;
+      for (let h = 0; h < hoursOOp.length; h++) {
+        totalCPH[h] += cookiesArr[h];
+      }
     }
 
+    return totalCPH;
+  }
 
-const lim = {
-    location: "Lima",
-    minCust: 2,
-    maxCust: 16,
-    avgCSales: 4.6,
-    avgCSales: 3.7,
-    opHrs: ["06:00", "07:00", "08:00", "09:00", "10:00","11:00","12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-    hrlyCust() {
-        //console.log(this.maxCust);
-        //console.log(this.minCust);
-        return getRandom (this.maxCust, this.minCust);
-    },
-    hrlyCookies: [],
-    getCookies() {
-        for (let i = 0; i < this.opHrs.length; i++) {
-            //console.log(`${this.location} avg cookies/sale`, this.avgCSales);
-            //console.log(`${this.location} avg customer/hour`, this.hrlyCust());
-            this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
-        }
-        return this.hrlyCookies;
-    },
-    totalCSales() {
-        let sum = 0;
-        for (let s = 0; s < this.opHrs.length; s++){
-        sum += this.getCookies()[s];
-        }
-        return sum
-    },
-    
-    
-}
+  //call total cookies per hour function
+    let cookieStandObjects = [sea, tok, dub, par, lim];
+    let totalCPH = getTotalCPH(cookieStandObjects);
 
-    let limDArray = document.getElementById("limData")
-    for (let i = 0; i < lim.opHrs.length; i++) {
-        let limVar = document.createElement("li");
-        limVar.innerHTML = `${lim.opHrs[i]}: ${lim.getCookies()[i]} cookies`;
-        limDArray.append(limVar);
-        //let limSum = document.createElement("li");
-        //limSum.innerHTML = `Total: ${lim.totalCSales()} cookies`;
-        //limSum.appendChild(".limData");
-        //limSum.append("#limData")
+    console.log(totalCPH);
+
+
+    let hrlyTotals = document.createElement("tr");
+    let totals = document.createElement("td");
+    totals.innerHTML = "Hourly Totals";
+    hrlyTotals.insertBefore(totals, hrlyTotals.firstChild);
+
+    for (let t = 0; t < totalCPH.length; t++) {
+      let CPH = document.createElement("td");
+      CPH.innerHTML = `${totalCPH[t]} cookies`;
+      hrlyTotals.append(CPH);
     }
-    
-    let limSum = document.createElement("li");
-    limSum.innerHTML = `Total: ${lim.totalCSales()} cookies`;
-    limDArray.append(limSum);
+
+    document.getElementById("salesData").append(hrlyTotals);
+
+    /*function getTotalCookiesByHour(hours) {
+        let totalCookiesByHour = [];
+        for (let i = 0; i < hours.length; i++) {
+          let sum = 0;
+          for (let j = 0; j < cookieStands.length; j++) {
+            sum += cookieStands[j].hrlyCookies[i];
+          }
+          totalCookiesByHour.push(sum);
+        }
+        return totalCookiesByHour;
+      }
+      
+      let totalCookies = getTotalCookiesByHour(hoursOOp);
+      
+      console.log(totalCookies);*/
