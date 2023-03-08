@@ -1,74 +1,91 @@
 "use strict"
 
-function getRandom (maxCust, minCust) {
-    return Math.ceil(Math.random() * (maxCust - minCust) + minCust);
+function getRandom(maxCust, minCust) {
+  return Math.ceil(Math.random() * (maxCust - minCust) + minCust);
 }
 
 let hoursOOp = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
 
+  let headerHours = document.createElement("tr");
+  let hrsFiller = document.createElement("th");
+  hrsFiller.innerHTML = "Operating Hours";
+  headerHours.append(hrsFiller);
+  
+    for (let i = 0; i < hoursOOp.length; i++) {
+      let hrsData = document.createElement("th");
+      hrsData.innerHTML = `${hoursOOp[i]}`;
+      headerHours.append(hrsData);
+  
+  }
+  
+  
+  document.getElementById("salesData").append(headerHours);
+  let headerTotal = document.createElement("th");
+  headerTotal.innerHTML = "Daily Totals";
+  headerHours.append(headerTotal);
+
+
 
 function cookieStandLocation(location, min, max, avg, hours) {
-    let stand = {};
-    stand.location = location;
-    stand.minCust = min;
-    stand.maxCust = max;
-    stand.avgCSales = avg;
-    stand.opHrs = hours;
-    stand.hrlyCookies = [];
+  let stand = {};
+  stand.location = location;
+  stand.minCust = min;
+  stand.maxCust = max;
+  stand.avgCSales = avg;
+  stand.opHrs = hours;
+  stand.hrlyCookies = [];
 
-    stand.hrlyCust = function() {
-        return getRandom (this.maxCust, this.minCust);
+  stand.hrlyCust = function () {
+    return getRandom(this.maxCust, this.minCust);
+  }
+
+  stand.getCookies = function getCookies() {
+    for (let i = 0; i < this.opHrs.length; i++) {
+      this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
+    }
+    return this.hrlyCookies;
+  }
+
+  stand.dailySales = function dailySales() {
+    let sum = 0;
+    for (let s = 0; s < this.opHrs.length; s++) {
+      sum += this.getCookies()[s];
+    }
+    return sum;
+  }
+
+
+
+  //loop through sales per hour, add them up then render 
+
+  stand.render = function () {
+    let trCookieStands = document.createElement("tr");
+    let localeTD = document.createElement("td");
+    localeTD.innerHTML = this.location;
+    trCookieStands.append(localeTD);
+
+    for (let c = 0; c < this.opHrs.length; c++) {
+      let tdCookies = document.createElement("td");
+
+      tdCookies.innerHTML = `${this.hrlyCookies[c]} cookies`;
+      document.getElementById("salesData")
+      trCookieStands.append(tdCookies);
     }
 
-    stand.getCookies = function getCookies() {
-        for (let i = 0; i < this.opHrs.length; i++) {
-            this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
-        }
-        return this.hrlyCookies;
-    }
+    document.getElementById("salesData").append(trCookieStands);
+    let dailySum = document.createElement("td");
+    dailySum.innerHTML = `${this.dailySales()} cookies`;
+    trCookieStands.append(dailySum);
 
-    stand.dailySales = function dailySales() {
-        let sum = 0;
-        for (let s = 0; s < this.opHrs.length; s++) {
-        sum += this.getCookies()[s];
-        }
-        return sum;
-    }
 
-    
-    
-//loop through sales per hour, add them up then render 
+  }
 
-    stand.render = function() {
-     let trCookieStands = document.createElement("tr");
-     let localeTD = document.createElement("td");
-     localeTD.innerHTML = this.location;
-     trCookieStands.append(localeTD);
+  return stand;
 
-        for (let c = 0; c < this.opHrs.length; c++) {
-            let tdCookies = document.createElement("td");
-            tdCookies.innerHTML = `${this.hrlyCookies[c]} cookies`;
-            trCookieStands.append(tdCookies);
-        }
-
-        /*for (let d = 0; d < this.location. ; d++) {
-        let dailySum = document.createElement("td");
-        dailySum.innerHTML = `${this.dailySum()} cookies`;
-        trCookieStands.append(dailySum);
-        }*/ 
-
-        document.getElementById("salesData").append(trCookieStands); 
-        let dailySum = document.createElement("td");
-        dailySum.innerHTML = `${this.dailySales()} cookies`;
-        trCookieStands.append(dailySum);
-
-        
-    }
-
-    return stand;
-    
 
 }
+
+
 
 const sea = new cookieStandLocation("Seattle", 23, 65, 6.3, hoursOOp, []);
 sea.hrlyCust();
@@ -102,49 +119,59 @@ lim.render();
 
 //iterates over the hrlyCookies arrays of each object and sums the values at each index position
 function getTotalCPH(objArr) {
-    let totalCPH = new Array(objArr[0].opHrs.length).fill(0);
-    for (let l = 0; l < objArr.length; l++) {
-      let cookiesArr = objArr[l].hrlyCookies;
-      for (let h = 0; h < hoursOOp.length; h++) {
-        totalCPH[h] += cookiesArr[h];
-      }
+  let totalCPH = new Array(objArr[0].opHrs.length).fill(0);
+  for (let l = 0; l < objArr.length; l++) {
+    let cookiesArr = objArr[l].hrlyCookies;
+    for (let h = 0; h < hoursOOp.length; h++) {
+      totalCPH[h] += cookiesArr[h];
     }
-
-    return totalCPH;
   }
 
-  //call total cookies per hour function
-    let cookieStandObjects = [sea, tok, dub, par, lim];
-    let totalCPH = getTotalCPH(cookieStandObjects);
+  return totalCPH;
+}
 
-    console.log(totalCPH);
+//call total cookies per hour function
+let cookieStandObjects = [sea, tok, dub, par, lim];
+let totalCPH = getTotalCPH(cookieStandObjects);
+
+console.log(totalCPH);
 
 
-    let hrlyTotals = document.createElement("tr");
-    let totals = document.createElement("td");
-    totals.innerHTML = "Hourly Totals";
-    hrlyTotals.insertBefore(totals, hrlyTotals.firstChild);
+let hrlyTotals = document.createElement("tr");
+let totals = document.createElement("td");
+totals.innerHTML = "Hourly Totals";
+hrlyTotals.insertBefore(totals, hrlyTotals.firstChild);
 
-    for (let t = 0; t < totalCPH.length; t++) {
-      let CPH = document.createElement("td");
-      CPH.innerHTML = `${totalCPH[t]} cookies`;
-      hrlyTotals.append(CPH);
-    }
+for (let t = 0; t < totalCPH.length; t++) {
+  let CPH = document.createElement("td");
+  CPH.innerHTML = `${totalCPH[t]} cookies`;
+  hrlyTotals.append(CPH);
+}
 
-    document.getElementById("salesData").append(hrlyTotals);
+let totalsTotal = 0
 
-    /*function getTotalCookiesByHour(hours) {
-        let totalCookiesByHour = [];
-        for (let i = 0; i < hours.length; i++) {
-          let sum = 0;
-          for (let j = 0; j < cookieStands.length; j++) {
-            sum += cookieStands[j].hrlyCookies[i];
-          }
-          totalCookiesByHour.push(sum);
-        }
-        return totalCookiesByHour;
+for (let r = 0; r < totalCPH.length; r++) {
+  totalsTotal += totalCPH[r];
+}
+
+let totalTotals = document.createElement("td");
+totalTotals.innerHTML = `${totalsTotal} cookies`;
+hrlyTotals.append(totalTotals);
+
+document.getElementById("salesData").append(hrlyTotals);
+
+/*function getTotalCookiesByHour(hours) {
+    let totalCookiesByHour = [];
+    for (let i = 0; i < hours.length; i++) {
+      let sum = 0;
+      for (let j = 0; j < cookieStands.length; j++) {
+        sum += cookieStands[j].hrlyCookies[i];
       }
-      
-      let totalCookies = getTotalCookiesByHour(hoursOOp);
-      
-      console.log(totalCookies);*/
+      totalCookiesByHour.push(sum);
+    }
+    return totalCookiesByHour;
+  }
+  
+  let totalCookies = getTotalCookiesByHour(hoursOOp);
+  
+  console.log(totalCookies);*/
