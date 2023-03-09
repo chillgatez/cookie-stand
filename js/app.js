@@ -4,7 +4,7 @@ function getRandom(maxCust, minCust) {
   return Math.ceil(Math.random() * (maxCust - minCust) + minCust);
 }
 
-let hoursOOp = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+  let hoursOOp = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
 
   let headerHours = document.createElement("tr");
   let hrsFiller = document.createElement("th");
@@ -23,6 +23,7 @@ let hoursOOp = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "
   let headerTotal = document.createElement("th");
   headerTotal.innerHTML = "Daily Totals";
   headerHours.append(headerTotal);
+
 
 
 
@@ -138,12 +139,12 @@ console.log(totalCPH);
 
 
 let hrlyTotals = document.createElement("tr");
-let totals = document.createElement("td");
+let totals = document.createElement("th");
 totals.innerHTML = "Hourly Totals";
 hrlyTotals.insertBefore(totals, hrlyTotals.firstChild);
 
 for (let t = 0; t < totalCPH.length; t++) {
-  let CPH = document.createElement("td");
+  let CPH = document.createElement("th");
   CPH.innerHTML = `${totalCPH[t]} cookies`;
   hrlyTotals.append(CPH);
 }
@@ -154,7 +155,7 @@ for (let r = 0; r < totalCPH.length; r++) {
   totalsTotal += totalCPH[r];
 }
 
-let totalTotals = document.createElement("td");
+let totalTotals = document.createElement("th");
 totalTotals.innerHTML = `${totalsTotal} cookies`;
 hrlyTotals.append(totalTotals);
 
