@@ -19,7 +19,7 @@ function getRandom(maxCust, minCust) {
   }
   
   
-  document.getElementById("salesData").append(headerHours);
+  document.getElementById("operationHours").append(headerHours);
   let headerTotal = document.createElement("th");
   headerTotal.innerHTML = "Daily Totals";
   headerHours.append(headerTotal);
@@ -159,7 +159,7 @@ let totalTotals = document.createElement("th");
 totalTotals.innerHTML = `${totalsTotal} cookies`;
 hrlyTotals.append(totalTotals);
 
-document.getElementById("salesData").append(hrlyTotals);
+document.getElementById("totalsByHour").append(hrlyTotals);
 
 /*function getTotalCookiesByHour(hours) {
     let totalCookiesByHour = [];
