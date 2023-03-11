@@ -135,7 +135,6 @@ p {
     width: 100%;
     padding: 0;
     margin: 0;
-    
 }
 
 #locList ul li {
@@ -143,7 +142,6 @@ p {
     text-align: center;
     display: block;
     padding: 10px;
-
 }
 
 #locImgContainer {
@@ -162,7 +160,6 @@ p {
     border: 10px double transparent;
     border-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true") 50 repeat;
     background-color: #FA8072;
-
 }
 
 footer {
@@ -181,23 +178,20 @@ footer a {
     color: white;
     text-decoration: none;
     font-family: 'Secular One', sans-serif;
-
 }
 
 #salesData {
     border: 10px double transparent;
     border-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true") 50 repeat;
     background-color: #FA8072;
-
 }
 
 #salesData th:first-child,:last-child {
     border: 2px solid #381E19;
+    color: #381E19;
+    font-family: 'Secular One', sans-serif;
 }
 
-#salesData th:not(:first-child, :last-child) {
-    border: 1px dotted #381E19;
-}
 
 #salesData td {
     border: 1px dashed #381E19;
