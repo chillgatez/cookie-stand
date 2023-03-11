@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+
+
+header {
+    background-color: #381E19;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 85px;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+header li {
+    flex: 1;
+    text-align: center;
+    text-transform: ;
+}
+
+header li a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+
+}
+
+#salmon {
+    display: inline-block;
+    width: auto;
+    height: 70px;
+
+}
+
+body {
+margin-top: 95px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #E07367;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Secular One', sans-serif;
+    background-color: #FA8072;
+    border-radius: 20px;
+    border: 10px solid transparent;
+    border-image: url("img/chinook.jpg") 50 repeat;
+    padding: 10px;
+
+}
+
+h1 { 
+    text-align: center;
+    margin: 0 auto;
+
+}
+
+
+main {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 10px double transparent;
+    border-image: url("img/chinook.jpg") 50 round;
+    background-color:#FA8072;
+
+
+}
+
