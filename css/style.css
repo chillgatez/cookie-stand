@@ -89,7 +89,7 @@ main {
     
 }
 
-img{
+img:not(:first-of-type), #merch > img {
     padding: 2%;
     margin: 2%;
     width: auto;
@@ -184,13 +184,33 @@ footer a {
     border: 10px double transparent;
     border-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true") 50 repeat;
     background-color: #FA8072;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#salesData th:first-child,:last-child {
-    border: 2px solid #381E19;
-    color: #381E19;
+#salesData th {
     font-family: 'Secular One', sans-serif;
 }
+
+#operationHours , #totalsByHour th:first-of-type{
+    color: #381E19;
+    text-decoration: underline;
+
+}
+
+#salesData > tr > td:first-of-type {
+    color: #381E19;
+    text-decoration: underline;
+    font-family: 'Secular One', sans-serif;
+    border: none;
+}
+
+#totalsByHour th:not(:first-of-type), #salesData > tr > td:last-of-type {
+    color: #381E19;
+    text-decoration: double underline;
+    border: none;
+    font-family: 'Secular One', sans-serif;
+}
+
 
 
 #salesData td {
