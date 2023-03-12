@@ -98,9 +98,17 @@ img:not(:first-of-type), #merch > img {
 }
 
 p {
+    width: 50%;
     text-align: left;
     padding: 10px;
     margin: 10px;
+
+}
+
+main > img {
+    max-width: 50%;
+    height: auto;
+    padding: 2%;
 
 }
 
