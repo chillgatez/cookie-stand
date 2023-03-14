@@ -1,28 +1,34 @@
 "use strict"
 
+let hoursOOp = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+
 function getRandom(maxCust, minCust) {
   return Math.ceil(Math.random() * (maxCust - minCust) + minCust);
 }
 
-  let hoursOOp = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+
+function headerRender() {
 
   let headerHours = document.createElement("tr");
   let hrsFiller = document.createElement("th");
   hrsFiller.innerHTML = "Operating Hours";
   headerHours.append(hrsFiller);
-  
-    for (let i = 0; i < hoursOOp.length; i++) {
-      let hrsData = document.createElement("th");
-      hrsData.innerHTML = `${hoursOOp[i]}`;
-      headerHours.append(hrsData);
-  
+
+  for (let i = 0; i < hoursOOp.length; i++) {
+    let hrsData = document.createElement("th");
+    hrsData.innerHTML = `${hoursOOp[i]}`;
+    headerHours.append(hrsData);
+
   }
-  
-  
+
   document.getElementById("operationHours").append(headerHours);
   let headerTotal = document.createElement("th");
   headerTotal.innerHTML = "Daily Totals";
   headerHours.append(headerTotal);
+
+}
+
+headerRender();
 
 
 
@@ -41,7 +47,7 @@ function cookieStandLocation(location, min, max, avg, hours) {
   }
 
   stand.getCookies = function getCookies() {
-    for (let i = 0; i < this.opHrs.length; i++) {
+    for (let i = 0; i < hoursOOp.length; i++) {
       this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
     }
     return this.hrlyCookies;
@@ -49,7 +55,7 @@ function cookieStandLocation(location, min, max, avg, hours) {
 
   stand.dailySales = function dailySales() {
     let sum = 0;
-    for (let s = 0; s < this.opHrs.length; s++) {
+    for (let s = 0; s < hoursOOp.length; s++) {
       sum += this.getCookies()[s];
     }
     return sum;
@@ -87,7 +93,6 @@ function cookieStandLocation(location, min, max, avg, hours) {
 }
 
 
-
 const sea = new cookieStandLocation("Seattle", 23, 65, 6.3, hoursOOp, []);
 sea.hrlyCust();
 sea.getCookies();
@@ -118,6 +123,33 @@ lim.getCookies();
 lim.dailySales();
 lim.render();
 
+let cookieStandObjects = [sea, tok, dub, par, lim];
+
+
+//new location from form
+const locBuild = document.getElementById("locAdd");
+
+locBuild.addEventListener("submit", function (event) {
+  event.preventDefault(); //prevent default submission behavior
+
+  const location = document.getElementById("addedLoc").value;
+  const minCust = parseInt(document.getElementById("addedMinCust").value);
+  const maxCust = parseInt(document.getElementById("addedMaxCust").value);
+  const avgCSales = parseInt(document.getElementById("addedAvgCSales").value);
+
+  const newLocation = cookieStandLocation(location, minCust, maxCust, avgCSales, hoursOOp, []);
+  newLocation.hrlyCust();
+  newLocation.getCookies();
+  newLocation.dailySales();
+  newLocation.render();
+
+  cookieStandObjects.push(newLocation);
+
+  renderFooter();
+
+  console.log(newLocation);
+});
+
 //iterates over the hrlyCookies arrays of each object and sums the values at each index position
 function getTotalCPH(objArr) {
   let totalCPH = new Array(objArr[0].opHrs.length).fill(0);
@@ -132,34 +164,40 @@ function getTotalCPH(objArr) {
 }
 
 //call total cookies per hour function
-let cookieStandObjects = [sea, tok, dub, par, lim];
-let totalCPH = getTotalCPH(cookieStandObjects);
 
-console.log(totalCPH);
+function renderFooter() {
+  let salesFoot = document.querySelector("#totalsByHour");
+  salesFoot.replaceChildren();
+  let totalCPH = getTotalCPH(cookieStandObjects);
+  let hrlyTotals = document.createElement("tr");
+  let totals = document.createElement("th");
+  totals.innerHTML = "Hourly Totals";
+  hrlyTotals.insertBefore(totals, hrlyTotals.firstChild);
 
+  for (let t = 0; t < totalCPH.length; t++) {
+    let CPH = document.createElement("th");
+    CPH.innerHTML = `${totalCPH[t]} cookies`;
+    hrlyTotals.append(CPH);
+  }
 
-let hrlyTotals = document.createElement("tr");
-let totals = document.createElement("th");
-totals.innerHTML = "Hourly Totals";
-hrlyTotals.insertBefore(totals, hrlyTotals.firstChild);
+  let totalsTotal = 0
 
-for (let t = 0; t < totalCPH.length; t++) {
-  let CPH = document.createElement("th");
-  CPH.innerHTML = `${totalCPH[t]} cookies`;
-  hrlyTotals.append(CPH);
+  for (let r = 0; r < totalCPH.length; r++) {
+    totalsTotal += totalCPH[r];
+  }
+
+  let totalTotals = document.createElement("th");
+  totalTotals.innerHTML = `${totalsTotal} cookies`;
+  hrlyTotals.append(totalTotals);
+  salesFoot.append(hrlyTotals);
+
+  console.log(totalCPH);
+
 }
 
-let totalsTotal = 0
+renderFooter();
 
-for (let r = 0; r < totalCPH.length; r++) {
-  totalsTotal += totalCPH[r];
-}
 
-let totalTotals = document.createElement("th");
-totalTotals.innerHTML = `${totalsTotal} cookies`;
-hrlyTotals.append(totalTotals);
-
-document.getElementById("totalsByHour").append(hrlyTotals);
 
 /*function getTotalCookiesByHour(hours) {
     let totalCookiesByHour = [];
