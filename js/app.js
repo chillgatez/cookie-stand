@@ -42,13 +42,9 @@ function cookieStandLocation(location, min, max, avg, hours) {
   stand.opHrs = hours;
   stand.hrlyCookies = [];
 
-  stand.hrlyCust = function () {
-    return getRandom(this.maxCust, this.minCust);
-  }
-
   stand.getCookies = function getCookies() {
     for (let i = 0; i < hoursOOp.length; i++) {
-      this.hrlyCookies.push(Math.ceil(this.avgCSales * this.hrlyCust()));
+      this.hrlyCookies.push(Math.ceil(this.avgCSales * getRandom(this.maxCust, this.minCust)));
     }
     return this.hrlyCookies;
   }
@@ -94,31 +90,26 @@ function cookieStandLocation(location, min, max, avg, hours) {
 
 
 const sea = new cookieStandLocation("Seattle", 23, 65, 6.3, hoursOOp, []);
-sea.hrlyCust();
 sea.getCookies();
 sea.dailySales();
 sea.render();
 
 const tok = cookieStandLocation("Tokyo", 3, 24, 1.2, hoursOOp, []);
-tok.hrlyCust();
 tok.getCookies();
 tok.dailySales();
 tok.render();
 
 const dub = cookieStandLocation("Dubai", 11, 38, 3.7, hoursOOp, []);
-dub.hrlyCust();
 dub.getCookies();
 dub.dailySales();
 dub.render();
 
 const par = cookieStandLocation("Paris", 20, 38, 2.3, hoursOOp, []);
-par.hrlyCust();
 par.getCookies();
 par.dailySales();
 par.render();
 
 const lim = cookieStandLocation("Lima", 2, 16, 4.6, hoursOOp, []);
-lim.hrlyCust();
 lim.getCookies();
 lim.dailySales();
 lim.render();
@@ -138,7 +129,6 @@ locBuild.addEventListener("submit", function (event) {
   const avgCSales = parseInt(document.getElementById("addedAvgCSales").value);
 
   const newLocation = cookieStandLocation(location, minCust, maxCust, avgCSales, hoursOOp, []);
-  newLocation.hrlyCust();
   newLocation.getCookies();
   newLocation.dailySales();
   newLocation.render();
@@ -152,10 +142,10 @@ locBuild.addEventListener("submit", function (event) {
 
 //iterates over the hrlyCookies arrays of each object and sums the values at each index position
 function getTotalCPH(objArr) {
-  let totalCPH = new Array(objArr[0].opHrs.length).fill(0);
-  for (let l = 0; l < objArr.length; l++) {
-    let cookiesArr = objArr[l].hrlyCookies;
-    for (let h = 0; h < hoursOOp.length; h++) {
+  let totalCPH = new Array(objArr[0].opHrs.length).fill(0); //initialzes a new arrary with same length as opHrs and ills it with 0
+  for (let l = 0; l < objArr.length; l++) { //loop through object in object array
+    let cookiesArr = objArr[l].hrlyCookies; //assigns variable to hrlyCookies of current array being passed through
+    for (let h = 0; h < hoursOOp.length; h++) { //loop through each element of 
       totalCPH[h] += cookiesArr[h];
     }
   }

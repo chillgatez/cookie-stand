@@ -220,11 +220,61 @@ footer a {
 }
 
 
-
 #salesData td {
     border: 1px dashed #381E19;
 }
 
+#locAdd {
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #381E19;
+    background-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true");
+    background-color: white;
 
+}
 
+#locAdd legend {
+    font-family: 'Secular One', sans-serif;
+    font-size: x-large;
+    color: #FA8072;
+    border: 5px solid #381E19;
+    background-color: white;
+    padding: 2%;
+    margin: 2%;
+    text-align: center;
+}
 
+#locAdd ul {
+    list-style: none;
+
+}
+
+#locAdd label {
+    font-family: 'Secular One', sans-serif;
+    font-size: larger;
+    text-shadow: 2px 2px 4px #381E19;
+    text-decoration: underline 2px #381E19;
+    color: #FA8072;
+
+}
+
+#locAdd input {
+    border: 1px solid #381E19;
+    border-radius: 10px;
+    width: auto;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+#locAdd button {
+    background-color: #381E19;
+    padding: 10px;
+    border-radius: 10px;
+    color: whitesmoke;
+    margin-left: 65%;
+}
+
+#locAdd button:hover {
+    background-color: #FA8072;
+}
