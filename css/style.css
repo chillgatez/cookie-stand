@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+
+
+header {
+    background-color: #381E19;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 85px;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header ul {
+    list-style: none;
+    font-family: 'Secular One', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+header li {
+    flex: 1;
+    text-align: center;
+    text-transform: ;
+}
+
+header li a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+
+}
+
+#salmon {
+    display: inline-block;
+    width: auto;
+    height: 70px;
+
+}
+
+body {
+    margin-top: 95px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #E07367;
+    background-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/chinook.jpg?raw=true");
+}
+
+h1, h2 {
+    color: #381E19;
+    font-family: 'Secular One', sans-serif;
+    background-color: #FA8072;
+    border-radius: 20px;
+    border: 10px solid transparent;
+    border-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true") 50 repeat;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+
+}
+
+
+main {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 10px double transparent;
+    border-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true") 50 repeat;
+    background-color:#FA8072;
+    
+}
+
+img:not(:first-of-type), #merch > img {
+    padding: 2%;
+    margin: 2%;
+    width: auto;
+    height: auto;
+
+}
+
+p {
+    width: 50%;
+    text-align: left;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+main > img {
+    max-width: 50%;
+    height: auto;
+    padding: 2%;
+
+}
+
+#locBody {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 10px double transparent;
+    border-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true") 50 repeat;
+    background-color: #FA8072;
+
+}
+
+#locList {
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#locList ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#locList ul li {
+    flex: 1;
+    text-align: center;
+    display: block;
+    padding: 10px;
+}
+
+#locImgContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#merch {
+    display: flex;
+    flex-flow: column;
+    border: 10px double transparent;
+    border-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true") 50 repeat;
+    background-color: #FA8072;
+}
+
+footer {
+    background-color: #381E19;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    width: 100%;
+    position: static;
+    display: flex;
+    align-items: center;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Secular One', sans-serif;
+}
+
+#salesData {
+    border: 10px double transparent;
+    border-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true") 50 repeat;
+    background-color: #FA8072;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#salesData th {
+    font-family: 'Secular One', sans-serif;
+}
+
+#operationHours , #totalsByHour th:first-of-type{
+    color: #381E19;
+    text-decoration: underline;
+
+}
+
+#salesData > tr > td:first-of-type {
+    color: #381E19;
+    text-decoration: underline;
+    font-family: 'Secular One', sans-serif;
+    border: none;
+}
+
+#totalsByHour th:not(:first-of-type), #salesData > tr > td:last-of-type {
+    color: #381E19;
+    text-decoration: double underline;
+    border: none;
+    font-family: 'Secular One', sans-serif;
+}
+
+
+#salesData td {
+    border: 1px dashed #381E19;
+}
+
+#locAdd {
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #381E19;
+    background-image: url("https://github.com/chillgatez/cookie-stand/blob/lab8b/mar8/img/fish.jpg?raw=true");
+    background-color: white;
+
+}
+
+#locAdd legend {
+    font-family: 'Secular One', sans-serif;
+    font-size: x-large;
+    color: #FA8072;
+    border: 5px solid #381E19;
+    background-color: white;
+    padding: 2%;
+    margin: 2%;
+    text-align: center;
+}
+
+#locAdd ul {
+    list-style: none;
+
+}
+
+#locAdd label {
+    font-family: 'Secular One', sans-serif;
+    font-size: larger;
+    text-shadow: 2px 2px 4px #381E19;
+    text-decoration: underline 2px #381E19;
+    color: #FA8072;
+
+}
+
+#locAdd input {
+    border: 1px solid #381E19;
+    border-radius: 10px;
+    width: auto;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+#locAdd button {
+    background-color: #381E19;
+    padding: 10px;
+    border-radius: 10px;
+    color: whitesmoke;
+    margin-left: 65%;
+}
+
+#locAdd button:hover {
+    background-color: #FA8072;
+}
