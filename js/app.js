@@ -123,6 +123,8 @@ const locBuild = document.getElementById("locAdd");
 locBuild.addEventListener("submit", function (event) {
   event.preventDefault(); //prevent default submission behavior
 
+  console.log("This is running");
+
   const location = document.getElementById("addedLoc").value;
   const minCust = parseInt(document.getElementById("addedMinCust").value);
   const maxCust = parseInt(document.getElementById("addedMaxCust").value);
@@ -137,7 +139,8 @@ locBuild.addEventListener("submit", function (event) {
 
   renderFooter();
 
-  console.log(newLocation);
+  locBuild.reset();
+
 });
 
 //iterates over the hrlyCookies arrays of each object and sums the values at each index position
@@ -204,3 +207,7 @@ renderFooter();
   let totalCookies = getTotalCookiesByHour(hoursOOp);
   
   console.log(totalCookies);*/
+
+
+
+
